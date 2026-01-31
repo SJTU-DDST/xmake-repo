@@ -13,7 +13,7 @@ package("rdmapp")
     add_configs("examples", {default = true, description = "Build examples"})
     add_configs("examples_pybind", {default = false, description = "Build pybind11 example"})
     add_configs("nortti", {default = true, description = "Build without RTTI"})
-    add_configs("pic", {default = false, description = "Build with -fPIC for shared library"})
+    add_configs("enable_pic", {default = false, description = "Build with -fPIC for shared library"})
 
     on_install(function (package)
         local configs = {}
@@ -21,8 +21,9 @@ package("rdmapp")
             configs.kind = "shared"
             package:config_set("pic", true)
         end
-        for _, name in ipairs({"docs", "asio_coro", "examples", "examples_pybind", "nortti", "pic"}) do
+        for _, name in ipairs({"docs", "asio_coro", "examples", "examples_pybind", "nortti"}) do
             configs[name] = package:config(name)
         end
+        configs.pic = package:config("enable_pic")
         import("package.tools.xmake").install(package, configs)
     end)
