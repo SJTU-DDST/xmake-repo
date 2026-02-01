@@ -2,8 +2,15 @@ package("rdmapp")
     set_description("The rdmapp package")
     add_deps("ibverbs", {system=true})
     add_deps("pthread", {system=true})
-    add_deps("spdlog 1.16.0", {private=true, configs={header_only=true}})
+    on_load(function (package)
+        if package:version_str() == "0.1.0" then
+            package:add("deps", "spdlog 1.16.0", {private = true, configs = {header_only = true}})
+        elseif package:config("examples") then
+            package:add("deps", "spdlog 1.16.0", {private = true, configs = {header_only = true}})
+        end
+    end)
 
+    add_versions("0.1.1", "5501fed3445d61d96072f8a194672a76bbe8c610")
     add_versions("0.1.0", "47ab612121be63d95d699d6aacc74ef34ce9b47d")
 
     add_urls("https://github.com/SJTU-DDST/rdmapp.git")
