@@ -18,6 +18,14 @@ package("syscall-intercept")
         table.insert(configs, "-DPERFORM_STYLE_CHECKS=OFF")
         table.insert(configs, "-DTREAT_WARNINGS_AS_ERRORS=OFF")
         import("package.tools.cmake").install(package, configs)
+
+        if not package:config("shared") then
+            print("removing extra generated shared library")
+            local libdir = package:installdir("lib")
+            if os.isdir(libdir) then
+                os.tryrm(path.join(libdir, "*.so*"))
+            end
+        end
     end)
 
     on_test(function (package)
