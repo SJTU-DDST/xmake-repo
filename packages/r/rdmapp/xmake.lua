@@ -16,7 +16,6 @@ package("rdmapp")
     add_urls("https://github.com/SJTU-DDST/rdmapp.git")
 
     add_configs("docs", {default = false, description = "Build docs"})
-    add_configs("asio_coro", {default = true, description = "Support Asio Coroutine"})
     add_configs("examples", {default = true, description = "Build examples"})
     add_configs("examples_pybind", {default = false, description = "Build pybind11 example"})
     add_configs("nortti", {default = true, description = "Build without RTTI"})
