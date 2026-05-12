@@ -13,6 +13,8 @@ package("coverbs-rpc")
     add_configs("tests", {default = false, description = "Build tests programs"})
 
     on_install(function (package)
+        print("coverbs-rpc(in-dev) on_install + git.pull")
+        os.exec("git pull")
         local configs = {}
         if package:config("shared") then
             configs.kind = "shared"
