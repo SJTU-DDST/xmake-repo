@@ -1,20 +1,20 @@
 package("coverbs-rpc")
     set_description("The coverbs-rpc package")
-    add_deps("rdmapp dev", {public=true,configs={enable_pic=true,examples=false,nortti=false}})
+    add_deps("rdmapp 0.1.0", {public=true,configs={enable_pic=true,examples=false,nortti=false}})
     add_deps("cppcoro-20", {public=true})
     add_deps("glaze 7.0.0", {public=true})
-    add_deps("spdlog 1.16.0", {private=true,configs={header_only=true}})
     add_deps("concurrentqueue 1.0.4", {private=true})
 
     add_urls("https://github.com/SJTU-DDST/coverbs-rpc.git")
-    add_versions("0.1.1", "b45b208d4255114dfe2b1430211a32f1cce6682a")
-    add_versions("0.1.0", "4beb7e4b2ec9deb4b536058c28f5941e13e5c9d8")
+    add_versions("0.1.0", "1268063af22171265e43d6e8dc6a6b836122d827")
 
     add_configs("tests", {default = false, description = "Build tests programs"})
 
     on_install(function (package)
-        print("coverbs-rpc(in-dev) on_install + git.pull")
-        os.exec("git pull")
+        if package:version_str() == "dev" then
+          print("coverbs-rpc(in-dev) on_install + git.pull")
+          os.exec("git pull")
+        end
         local configs = {}
         if package:config("shared") then
             configs.kind = "shared"

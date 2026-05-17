@@ -2,16 +2,8 @@ package("rdmapp")
     set_description("The rdmapp package")
     add_deps("ibverbs", {system=true})
     add_deps("pthread", {system=true})
-    on_load(function (package)
-        if package:version_str() == "0.1.0" then
-            package:add("deps", "spdlog 1.16.0", {private = true, configs = {header_only = true}})
-        elseif package:config("examples") then
-            package:add("deps", "spdlog 1.16.0", {private = true, configs = {header_only = true}})
-        end
-    end)
 
-    add_versions("0.1.1", "5501fed3445d61d96072f8a194672a76bbe8c610")
-    add_versions("0.1.0", "47ab612121be63d95d699d6aacc74ef34ce9b47d")
+    add_versions("0.1.0", "d25f34ac32b5118064b558bfbeddd8a3c6eabc45")
 
     add_urls("https://github.com/SJTU-DDST/rdmapp.git")
 
@@ -27,7 +19,7 @@ package("rdmapp")
             configs.kind = "shared"
             package:config_set("pic", true)
         end
-        for _, name in ipairs({"docs", "asio_coro", "examples", "examples_pybind", "nortti"}) do
+        for _, name in ipairs({"docs", "examples", "examples_pybind", "nortti"}) do
             configs[name] = package:config(name)
         end
         configs.pic = package:config("enable_pic")
