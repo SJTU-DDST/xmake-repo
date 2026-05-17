@@ -7,6 +7,7 @@ package("coverbs-rpc")
 
     add_urls("https://github.com/SJTU-DDST/coverbs-rpc.git")
     add_versions("0.1.0", "1268063af22171265e43d6e8dc6a6b836122d827")
+	add_versions("0.1.1", "d14fb56d430c0c97c58cf9073967619d9f093e1c")
 
     add_configs("tests", {default = false, description = "Build tests programs"})
 
