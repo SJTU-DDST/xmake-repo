@@ -1,6 +1,5 @@
 package("coverbs-rpc")
     set_description("The coverbs-rpc package")
-    add_deps("rdmapp 0.1.0", {public=true,configs={enable_pic=true,examples=false,nortti=false}})
     add_deps("cppcoro-20", {public=true})
     add_deps("glaze 7.0.0", {public=true})
     add_deps("concurrentqueue 1.0.4", {private=true})
@@ -8,8 +7,24 @@ package("coverbs-rpc")
     add_urls("https://github.com/SJTU-DDST/coverbs-rpc.git")
     add_versions("0.1.0", "1268063af22171265e43d6e8dc6a6b836122d827")
 	add_versions("0.1.1", "d14fb56d430c0c97c58cf9073967619d9f093e1c")
+    add_versions("0.2.0", "c2f64955da9e5f05c2250fab26326b572ee5087a")
 
     add_configs("tests", {default = false, description = "Build tests programs"})
+
+    on_load(function (package)
+        local rdmapp_version_map = {
+            ["0.1.0"] = "0.1.0",
+            ["0.1.1"] = "0.1.0",
+            ["0.2.0"] = "0.1.1"
+        }
+        local rdmapp_version = rdmapp_version_map[package:version_str()]
+        if rdmapp_version then
+            package:add("deps", "rdmapp " .. rdmapp_version, {
+                public=true,
+                configs={enable_pic=true,examples=false,nortti=false}
+            })
+        end
+    end)
 
     on_install(function (package)
         if package:version_str() == "dev" then
