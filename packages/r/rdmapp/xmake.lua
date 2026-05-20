@@ -4,6 +4,7 @@ package("rdmapp")
     add_deps("pthread", {system=true})
 
     add_versions("0.1.0", "d25f34ac32b5118064b558bfbeddd8a3c6eabc45")
+    add_versions("0.1.1", "dfa5094c19926230aa32e9cf62ed92d7602337d6")
 
     add_urls("https://github.com/SJTU-DDST/rdmapp.git")
 
